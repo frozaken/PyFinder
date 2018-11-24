@@ -1,4 +1,12 @@
 #include "filereadertester.h"
+#include <string>
+#include <vector>
+#include <fstream>
+#include <limits.h>
+#include <stdlib.h>
+#include <iostream>
+#include <glob.h>
+using namespace std;
 
 using ::testing::Return;
 
@@ -12,7 +20,11 @@ void FileReaderTester::SetUp(){
 
 void FileReaderTester::TearDown(){}
 
-
 TEST_F(FileReaderTester, testcall){
-    EXPECT_EQ(1,1); //lets just check something trivial
+
+    string testfile = "testdata/pyfile1.py";
+    vector<string>* lines = fr->ReadFile(testfile);
+
+    EXPECT_EQ(lines->size(),1);
+    EXPECT_EQ(lines->front(), "import numpy");
 }

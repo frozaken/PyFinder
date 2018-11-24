@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 #include "filereader.h"
+#include <string>
 
 class FileReaderTester : public ::testing::Test{
     protected:

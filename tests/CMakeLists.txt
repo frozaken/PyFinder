@@ -1,6 +1,8 @@
 # We need thread support
 find_package(Threads REQUIRED)
 
+file(COPY testdata DESTINATION ${CMAKE_SOURCE_DIR})
+
 # Enable ExternalProject CMake module
 include(ExternalProject)
 

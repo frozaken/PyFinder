@@ -4,17 +4,17 @@ file(GLOB libhdrs "*.h")
 add_library(PyFinderCore STATIC ${libsrc} ${libhdrs})
 
 # library that holds test target
-add_library(PyFinderT "")
+add_library(coretestexport "")
 
 target_sources(
-    PyFinderT
+    coretestexport
     PRIVATE
         ${libsrc}
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/filereader.h
 )
 target_include_directories(
-    PyFinderT
+    coretestexport
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
 )
