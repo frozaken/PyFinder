@@ -13,4 +13,4 @@ To run it
 pyfinder *.py > requirements.txt
 pip install -r requirements.txt
 ```
-Currently it will break on standard library imports, this will be fixed
+Currently it will break on libraries with different import names than their pypi names
