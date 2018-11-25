@@ -29,9 +29,20 @@ TEST_F(TokenizerTester, testgetstatements){
 
     vector<string>* tokens = tkn->GetStatements(*lines);
 
-    EXPECT_EQ(tokens->size(), 2);
+    ASSERT_EQ(tokens->size(), 2);
     EXPECT_EQ(tokens->at(0), "import numpy");
     EXPECT_EQ(tokens->at(1), "import re");
+}
+
+TEST_F(TokenizerTester, testbasic){
+    FileReader* fr = new FileReader();
+
+    auto lines = fr->ReadFile("testdata/pyfile1.py");
+
+    auto statements = tkn->GetStatements(*lines);
+
+    ASSERT_EQ(statements->size(), 1);
+    EXPECT_EQ(statements->front(), "import numpy");
 }
 
 TEST_F(TokenizerTester, testcomments){
@@ -41,7 +52,7 @@ TEST_F(TokenizerTester, testcomments){
 
     auto statements = tkn->GetStatements(*lines);
 
-    EXPECT_EQ(statements->size(), 1);
+    ASSERT_EQ(statements->size(), 1);
     EXPECT_EQ(statements->front(), "import re");
 }
 
@@ -52,9 +63,10 @@ TEST_F(TokenizerTester, testincodestring){
 
     auto statements = tkn->GetStatements(*lines);
 
-    EXPECT_EQ(statements->size(), 3);
+    ASSERT_EQ(statements->size(), 4);
     EXPECT_EQ(statements->at(0), "import numpy");
     EXPECT_EQ(statements->at(1), "import re");
+    EXPECT_EQ(statements->at(2), "from math import log2");
 }
 
 TEST_F(TokenizerTester, testgetimports){
@@ -64,13 +76,14 @@ TEST_F(TokenizerTester, testgetimports){
 
     auto statements = tkn->GetStatements(*lines);
 
-    EXPECT_EQ(statements->size(), 3);
+    ASSERT_EQ(statements->size(), 4);
     
     auto imports = tkn->FilterImportLines(*statements);
 
-    EXPECT_EQ(imports->size(), 2);
+    ASSERT_EQ(imports->size(), 3);
     EXPECT_EQ(imports->at(0), "import numpy");
     EXPECT_EQ(imports->at(1), "import re");
+    EXPECT_EQ(imports->at(2), "from math import log2");
 }
 
 TEST_F(TokenizerTester, testimportmulicomment){
@@ -80,10 +93,10 @@ TEST_F(TokenizerTester, testimportmulicomment){
 
     auto statements = tkn->GetStatements(*lines);
 
-    EXPECT_EQ(statements->size(), 1);
+    ASSERT_EQ(statements->size(), 1);
     
     auto imports = tkn->FilterImportLines(*statements);
 
-    EXPECT_EQ(imports->size(), 1);
+    ASSERT_EQ(imports->size(), 1);
     EXPECT_EQ(imports->at(0), "import re");
 }

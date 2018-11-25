@@ -5,17 +5,20 @@
 #include <regex>
 using namespace std;
 
-Tokenizer::Tokenizer(){}
+Tokenizer::Tokenizer(){
+    importre = regex("(?:import ([^ \n;]+) *|from ([^ \n]+) import [^ \n]+)");
+    strreg = regex("[\"'][^\"\']*[\"\']");
+    mltlncmt = regex("\"\"\"");
+}
 
 vector<string>* Tokenizer::GetStatements(const vector<string>& lines){
     vector<string>* tokens = new vector<string>();
 
     bool incomment = false;
-    regex mltlncmt("\"\"\"");
 
     for(vector<string>::const_iterator it = lines.begin(); it < lines.end(); ++it){
         if(this->StartsWith(*it, "#")) continue;
-        if(regex_match(this->Trim(*it),mltlncmt)){
+        if(regex_match(this->Trim(*it),this->mltlncmt)){
             incomment = !incomment;
             continue;
         }
@@ -30,9 +33,8 @@ vector<string>* Tokenizer::GetStatements(const vector<string>& lines){
 vector<string>* Tokenizer::FilterImportLines(const vector<string>& statements){
     vector<string>* importstatements = new vector<string>();
 
-    regex importre("(import [^ \n]+|from [^ \n]+ import [^ \n]+)");
     for(vector<string>::const_iterator it = statements.begin(); it < statements.end(); ++it){
-            if(regex_match(*it, importre))
+            if(regex_match(*it, this->importre))
                 importstatements->push_back(*it);
     }
     return importstatements;
@@ -60,13 +62,11 @@ vector<string> Tokenizer::ProcessLine(const string& line){
     size_t spos = 0;
     string toadd;
 
-    regex strreg("[\"'][^\"\']*[\"\']");
-
-    string nostrline = regex_replace(line, strreg, "");
+    string nostrline = regex_replace(line, this->strreg, "");
 
     for(size_t i = 0; i < nostrline.length(); ++i){
-        if(nostrline[i] == ';' || i == nostrline.length() - 1){
-            toadd = this->Trim(nostrline.substr(spos,i++));
+        if(nostrline[i+1] == ';' || i == nostrline.length() - 1){
+            toadd = this->Trim(nostrline.substr(spos,++i));
             spos = i+1;
             toks->push_back(toadd);
         }
