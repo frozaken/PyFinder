@@ -1,7 +1,9 @@
 # We need thread support
 find_package(Threads REQUIRED)
 
-file(COPY testdata DESTINATION ${CMAKE_SOURCE_DIR})
+message("-- Copying testdata from ${CMAKE_CURRENT_SOURCE_DIR}/testdata to ${PROJECT_BINARY_DIR}")
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/testdata DESTINATION ${PROJECT_BINARY_DIR})
 
 # Enable ExternalProject CMake module
 include(ExternalProject)

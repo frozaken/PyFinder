@@ -20,7 +20,7 @@ void FileReaderTester::SetUp(){
 
 void FileReaderTester::TearDown(){}
 
-TEST_F(FileReaderTester, testcall){
+TEST_F(FileReaderTester, testreadline){
 
     string testfile = "testdata/pyfile1.py";
     vector<string>* lines = fr->ReadFile(testfile);
