@@ -31,10 +31,8 @@ TEST_F(ImportResolverTester, testresolvebasic){
 
     vector<string>* imports = irs->ResolveImports(lines);
 
-    ASSERT_EQ(imports->size(), 3);
+    ASSERT_EQ(imports->size(), 1);
     EXPECT_TRUE(isin(*imports, "numpy"));
-    EXPECT_TRUE(isin(*imports, "re"));
-    EXPECT_TRUE(isin(*imports, "math"));
 }
 
 TEST_F(ImportResolverTester, testpyfile1){
@@ -57,7 +55,7 @@ TEST_F(ImportResolverTester, testpyfile5){
     FileReader* fr = new FileReader();
 
     vector<string>* lines = fr->ReadFile("testdata/pyfile5.py");
-    ASSERT_EQ(lines->size(), 3);
+    ASSERT_EQ(lines->size(), 6);
 
     lines = tkn->GetStatements(*lines);
     lines = tkn->FilterImportLines(*lines);
@@ -65,5 +63,5 @@ TEST_F(ImportResolverTester, testpyfile5){
     vector<string>* imports = irs->ResolveImports(*lines);
 
     ASSERT_EQ(imports->size(), 1);
-    EXPECT_EQ(imports->at(0), "re");
+    EXPECT_EQ(imports->at(0), "numpy");
 }

@@ -30,22 +30,18 @@ TEST_F(PyFinderTester, testfullflow1){
 TEST_F(PyFinderTester, testfullflow2){
     vector<string>* packs = pf->FindPackages("testdata/pyfile2.py");
 
-    ASSERT_EQ(packs->size(),3);
+    ASSERT_EQ(packs->size(),1);
     EXPECT_TRUE(isin(*packs, "numpy"));
-    EXPECT_TRUE(isin(*packs, "re"));
-    EXPECT_TRUE(isin(*packs, "math"));
 }
 
 TEST_F(PyFinderTester, testfullflow3){
     vector<string>* packs = pf->FindPackages("testdata/pyfile3.py");
 
-    ASSERT_EQ(packs->size(),1);
-    EXPECT_EQ(packs->at(0), "re");
+    ASSERT_EQ(packs->size(),0);
 }
 
 TEST_F(PyFinderTester, testfullflow4){
     vector<string>* packs = pf->FindPackages("testdata/pyfile4.py");
 
-    ASSERT_EQ(packs->size(),1);
-    EXPECT_EQ(packs->at(0), "re");
+    ASSERT_EQ(packs->size(),0);
 }
