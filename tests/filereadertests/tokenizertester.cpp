@@ -45,6 +45,18 @@ TEST_F(TokenizerTester, testcomments){
     EXPECT_EQ(statements->front(), "import re");
 }
 
+TEST_F(TokenizerTester, testincodestring){
+    FileReader* fr = new FileReader();
+
+    auto lines = fr->ReadFile("testdata/pyfile2.py");
+
+    auto statements = tkn->GetStatements(*lines);
+
+    EXPECT_EQ(statements->size(), 3);
+    EXPECT_EQ(statements->at(0), "import numpy");
+    EXPECT_EQ(statements->at(1), "import re");
+}
+
 TEST_F(TokenizerTester, testgetimports){
     FileReader* fr = new FileReader();
 
@@ -53,10 +65,25 @@ TEST_F(TokenizerTester, testgetimports){
     auto statements = tkn->GetStatements(*lines);
 
     EXPECT_EQ(statements->size(), 3);
-
+    
     auto imports = tkn->FilterImportLines(*statements);
 
     EXPECT_EQ(imports->size(), 2);
     EXPECT_EQ(imports->at(0), "import numpy");
     EXPECT_EQ(imports->at(1), "import re");
+}
+
+TEST_F(TokenizerTester, testimportmulicomment){
+    FileReader* fr = new FileReader();
+
+    auto lines = fr->ReadFile("testdata/pyfile4.py");
+
+    auto statements = tkn->GetStatements(*lines);
+
+    EXPECT_EQ(statements->size(), 1);
+    
+    auto imports = tkn->FilterImportLines(*statements);
+
+    EXPECT_EQ(imports->size(), 1);
+    EXPECT_EQ(imports->at(0), "import re");
 }

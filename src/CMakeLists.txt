@@ -1,8 +1,8 @@
-add_executable(PyFinder main.cpp)
+add_executable(pyfinder main.cpp)
 
 add_subdirectory(core)
 
-target_link_libraries(PyFinder PyFinderCore)
-target_include_directories(PyFinder PRIVATE ${PROJECT_BINARY_DIR})
+target_link_libraries(pyfinder pyfindercore)
+target_include_directories(pyfinder PRIVATE ${PROJECT_BINARY_DIR})
 
-install(TARGETS PyFinder DESTINATION PyTest/bin)
+install(TARGETS pyfinder DESTINATION pyfinder/bin)

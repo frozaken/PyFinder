@@ -2,7 +2,7 @@ file(GLOB SRCS *.cpp)
 
 ADD_EXECUTABLE(testpyfinder ${SRCS})
 
-TARGET_LINK_LIBRARIES(testpyfinder libgtest libgmock coretestexport)
+TARGET_LINK_LIBRARIES(testpyfinder libgtest libgmock pyfindercore)
 
 
 add_test(NAME 

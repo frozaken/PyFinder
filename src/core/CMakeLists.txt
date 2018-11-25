@@ -1,24 +1,24 @@
 file(GLOB libsrc "*.cpp")
 file(GLOB libhdrs "*.h")
 
-add_library(PyFinderCore STATIC ${libsrc} ${libhdrs})
+add_library(pyfindercore STATIC)
+
 
 # library that holds test target
-add_library(coretestexport "")
 
 target_sources(
-    coretestexport
-    PRIVATE
+    pyfindercore
+   PRIVATE
         ${libsrc}
     PUBLIC
-        ${CMAKE_CURRENT_LIST_DIR}/filereader.h
+        ${libhdrs}
 )
 target_include_directories(
-    coretestexport
+    pyfindercore
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
-install(TARGETS PyFinderCore DESTINATION PyFinder/lib)
+install(TARGETS pyfindercore DESTINATION pyfinder/lib)
 
-install(FILES ${PROJECT_SOURCE_DIR}/src/core/filereader.h DESTINATION PyFinder/include)
+install(FILES ${PROJECT_SOURCE_DIR}/src/core/filereader.h DESTINATION pyfinder/include)
