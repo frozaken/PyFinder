@@ -21,4 +21,4 @@ target_include_directories(
 
 install(TARGETS pyfindercore DESTINATION pyfinder/lib)
 
-install(FILES ${PROJECT_SOURCE_DIR}/src/core/filereader.h DESTINATION pyfinder/include)
+install(FILES ${PROJECT_SOURCE_DIR}/src/core/pyfinder.h DESTINATION pyfinder/include)
