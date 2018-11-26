@@ -34,25 +34,7 @@ string* ImportResolver::QualifyPackage(const string& impstatement){ // needs to 
     if(matches[1].length()) *finmatch = matches[1].str();
     else *finmatch = matches[2].str();
 
-    if(this->BinarySearch(PyLibs::lib36, *finmatch)) return nullptr;
+    if(PyLibs::lib36.find(*finmatch) != PyLibs::lib36.end()) return nullptr;
 
     return finmatch;    
-}
-
-bool ImportResolver::BinarySearch(const vector<string>& vec, string pack) {
-   size_t mid, left = 0 ;
-   size_t right = vec.size(); 
-   while (left < right) {
-      mid = left + (right - left)/2;
-      if (pack > vec[mid]){
-          left = mid+1;
-      }
-      else if (pack < vec[mid]){                                        
-        right = mid;
-      }
-      else {                                                                  
-        return true;
-     }                                                                                                               
-   }
-   return false;      
 }

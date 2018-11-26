@@ -1,4 +1,4 @@
-#include <vector>
+#include <unordered_set>
 #include <string>
 
 using namespace std;
@@ -7,7 +7,7 @@ using namespace std;
 #define PYLIBS_H 1
 
 namespace PyLibs{
-    const vector<string> lib36 = {
+    const unordered_set<string> lib36 = {
         "__future__",
         "__main__",
         "_dummy_thread",
