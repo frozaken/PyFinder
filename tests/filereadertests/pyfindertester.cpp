@@ -34,6 +34,14 @@ TEST_F(PyFinderTester, testfullflow2){
     EXPECT_TRUE(isin(*packs, "numpy"));
 }
 
+TEST_F(PyFinderTester, testfullflow6){
+    vector<string>* packs = pf->FindPackages("testdata/pyfile6.py");
+
+    ASSERT_EQ(packs->size(),1);
+    EXPECT_TRUE(isin(*packs, "numpy"));
+}
+
+
 TEST_F(PyFinderTester, testfullflow3){
     vector<string>* packs = pf->FindPackages("testdata/pyfile3.py");
 
