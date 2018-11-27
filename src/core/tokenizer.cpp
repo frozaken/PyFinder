@@ -34,7 +34,7 @@ vector<string>* Tokenizer::FilterImportLines(const vector<string>& statements){
     vector<string>* importstatements = new vector<string>();
 
     for(vector<string>::const_iterator it = statements.begin(); it < statements.end(); ++it){
-            if(regex_match(*it, this->importre))
+            if(regex_search(*it, this->importre))
                 importstatements->push_back(*it);
     }
     return importstatements;

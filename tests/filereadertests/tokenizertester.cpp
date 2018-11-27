@@ -86,6 +86,21 @@ TEST_F(TokenizerTester, testgetimports){
     EXPECT_EQ(imports->at(2), "from math import log2");
 }
 
+TEST_F(TokenizerTester, testgetimports2){
+    FileReader* fr = new FileReader();
+
+    auto lines = fr->ReadFile("testdata/pyfile6.py");
+
+    auto statements = tkn->GetStatements(*lines);
+
+    ASSERT_EQ(statements->size(), 1);
+    
+    auto imports = tkn->FilterImportLines(*statements);
+
+    ASSERT_EQ(imports->size(), 1);
+    EXPECT_EQ(imports->at(0), "import numpy as np");
+}
+
 TEST_F(TokenizerTester, testimportmulicomment){
     FileReader* fr = new FileReader();
 
