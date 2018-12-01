@@ -1,5 +1,5 @@
 # PyFinder
-A short command line tool to find python package dependancies in your python propjects
+A short command line tool to find python package dependancies in your python projects
 To install it:
 ```bash
 mkdir build
